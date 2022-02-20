@@ -1,8 +1,4 @@
 
-console.log(enemy.names);
-console.log(enemyInfo.length);
-console.log(enemy.names[0]);
-console.log(enemy.names[3]);
 
 //fight function (now with perameter for enemy's name)
 var fight = function(enemy) {
@@ -64,9 +60,7 @@ var fight = function(enemy) {
     
 var startGame = function() {
     // reset player stats
-    playerInfo.health = 100;
-    playerInfo.attack = 10;
-    playerInfo.money = 10;
+    playerInfo.reset();
 
     for(var i = 0; i < enemyInfo.length; i++) {
         if(playerInfo.health > 0) {
@@ -124,34 +118,12 @@ var shop = function() {
     switch (shopOptionPrompt) {
         case "REFILL":
         case "refill":
-            if (playerInfo.money >= 7) {
-                window.alert("Refilling player's health by 20 for 7 dollars.");
-
-                //increase health and descrease money
-                playerInfo.health = playerInfo.health + 20;
-                playerInfo.money = playerInfo.money - 7;
-            }
-            else {
-                window.alert("You don't have enough money!");
-            }
-
-            break;
-
+        playerInfo.refillHealth();
+        break;
         case "UPGRADE":
         case "upgrade":
-            if (playerInfo.money >= 7) {
-                window.alert("Upgrading player's attack by 6 for 7 dollars.");
-
-                //increase attack and decrease money
-                playerInfo.attack = playerInfo.attack + 6;
-                playerInfo.money = playerInfo.money - 7;
-            }
-            else {
-                window.alert("You don't have enough money!");
-            }
-
-            break;
-            
+        playerInfo.upgradeAttack();
+        break;
         case "LEAVE":
         case "leave":
             window.alert("Leaving the store.");
@@ -183,6 +155,26 @@ var playerInfo = {
         this.health = 100;
         this.money = 10;
         this.attack = 10;
+    }, //coma!
+    refillHealth: function() {
+        if (this.money >= 7) {
+            window.alert("Refilling player's health by 20 for 7 dollars.");
+            this.health += 20;
+            this.money -= 7;
+        }
+        else {
+            window.alert("You don't have enough money!");
+        }
+    }, // coma!
+    upgradeAttack: function() {
+        if (this.money >= 7) {
+            window.alert("Upgrading player's attack by 6 for 7 dollars.");
+            this.attack += 6;
+            this.money -= 7;
+        }
+        else {
+            window.alert("You don't have enough money!");
+        }
     }
 };
 
